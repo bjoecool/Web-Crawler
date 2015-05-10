@@ -1,0 +1,5 @@
+From,To,Depart Date,Arrive Date,Flight #,Time Depart,Time Arrive,Lowest Price,Award Points
+jfk,san,05/12/2015,05/12/2015,"[u'UA443', u'UA6335']",8:25 a.m.,1:56 p.m.,$651,"25,000 Miles"
+jfk,san,05/12/2015,05/12/2015,"[u'UA441', u'UA6312']",6:00 a.m.,11:41 a.m.,$651,"25,000 Miles"
+jfk,san,05/12/2015,05/12/2015,"[u'UA541', u'UA1614']",8:42 a.m.,2:34 p.m.,$651,"25,000 Miles"
+jfk,san,05/12/2015,05/12/2015,"[u'UA257', u'UA718']",2:00 p.m.,9:12 p.m.,$651,"25,000 Miles"
