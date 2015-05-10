@@ -58,7 +58,7 @@ class getFares(): #Class for crawling the website
 		#Enter the Return Date value
 		returnDt = self.browser.find_element_by_xpath('//input[contains(@id, "ctl00_ContentInfo_Booking1_RetDateTime_Retdate_txtRetDate")]')
 		returnDt.send_keys(self.retdt)
-		self.srchPrice()
+		#self.srchPrice()
 		
 	def srchPrice(self): #Function for Searching by Price
 		print "Search Criteria: Price"
@@ -99,7 +99,7 @@ class getFares(): #Class for crawling the website
 			#print self.p_arrtime
 			#print self.p_arrdt
 			#print self.p_fare
-			self.srchAwards()
+			#self.srchAwards()
 		except NoSuchElementException:
 			print "Wrong Parameter Values"	
 
@@ -148,8 +148,8 @@ class getFares(): #Class for crawling the website
 		except NoSuchElementException:
 			print "Wrong Parameter Values"	
 
-		self.browser.close()
-		self.writeCSV()
+		#self.browser.close()
+		#self.writeCSV()
 	
 	def writeCSV(self): # Function for writing data into results.csv file from result dictionary
 		with open('results.csv','w') as csvfile:
@@ -159,20 +159,35 @@ class getFares(): #Class for crawling the website
 
 			for i in range(1,len(self.d_res.keys())):
 				writer.writerow({'From':self.src, 'To':self.dest, 'Depart Date':self.dptdt, 'Arrive Date':self.d_res[i][0], 'Flight #':self.d_res[i][1], 'Time Depart':self.d_res[i][2], 'Time Arrive':self.d_res[i][3], 'Lowest Price':self.d_res[i][4], 'Award Points':self.d_res[i][5]})
+			
+			print "results.csv updated"
 		
 def Start():
 	myClassObject = getFares(argv[1],argv[2],argv[3],argv[4])	
 	myClassObject.fillDtls()
+	myClassObject.srchPrice()
+	myClassObject.srchAwards()
+	myClassObject.browser.close()
+	myClassObject.writeCSV()
 
-	
+def delay(interval):
+	print time.time()
+	s.enter(1, 1, Start, ())
+	time.sleep(interval)
+	return 1
+
 if __name__ == "__main__":
 	if len(argv) != 6:
     		print 'usage: %s <Source> <Destination> <Dept Date> <Return Date> <Interval>' %argv[0]
     		exit(1)
 
   	#myClassObject = getFares(argv[1],argv[2],argv[3],argv[4])
-	
 	s = sched.scheduler(time.time, time.sleep)
-	s.enter(int(argv[5]), 1, Start, ())
-	s.run()
+	#s.enter(1, 1, Start, ())
+	#s.run()
+
+	while delay(int(argv[5])*60):
+		#s.enter(1, 1, Start, ())
+		s.run()
+	
 #myClassObject.fillDtls()
